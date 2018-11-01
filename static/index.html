@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<!-- This is how system developper write front code ;p -->
+<head>
+    <title>Hacker news</title>
+
+    <style>
+        .comment p, .comment + p {
+    line-height: 16px;
+    margin: 8px 0 0 0;
+}
+
+.comment u, .comment u a, .comment u a:visited, .comment + p u, .comment + p u a, .comment + p u a:visited {
+    color: #777;
+    text-decoration: none ;
+}
+
+.pagetop {
+    font-family: "Lucida Grande", "Segoe UI", Arial, Helvetica, sans-serif;
+    font-size: 14px;
+}
+
+.subtext {
+    font-family: "Lucida Grande", "Segoe UI", Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    height: 20px;
+    vertical-align: top;
+}
+
+.title {
+    color: #ccc;
+    font-family: "Lucida Grande", "Segoe UI", Arial, Helvetica, sans-serif;
+    font-size: 16px;
+}
+
+a {
+    text-decoration: none;
+    color: #000000;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+body {
+    margin: 0;
+}
+
+body > center > table {
+    background-color: transparent;
+    width: 100%;
+}
+
+body > center > table > tbody > tr > td > table {
+    margin: 0 auto;
+    width: 960px;
+}
+
+body > center > table > tbody > tr:first-child > td {
+    background-image: -webkit-linear-gradient(top, #f60, #f70);
+    border-bottom: solid 1px #f60;
+    box-shadow: 0 2px rgba(0,0,0,.1);
+}
+
+body > center > table > tbody > tr:first-child > td > table {
+    margin: 0 auto;
+    padding: 7px !important;
+    width: 960px;
+}
+
+body > center > table > tbody > tr:first-child > td > table > tbody > tr > td:first-child {
+    padding-right: 10px;
+}
+
+body > center > table > tbody > tr:nth-child(3) > td {
+    padding: 10px 0;
+}
+
+body > center > table > tbody > tr:nth-child(3) > td > form {
+    margin: 0 auto;
+    width: 960px;
+}
+
+body > center > table > tbody > tr:nth-child(3) > td > table {
+    margin: 0 auto;
+    width: 960px;
+}
+
+body > center > table > tbody > tr:nth-child(3) > td > table > tbody > tr:first-child > td:nth-child(2).title > a {
+    font-size: 18px;
+}
+
+td > center > table {
+    background-color: white;
+    border: solid 1px #000;
+    width: 940px;
+}
+
+td > center > table td {
+    padding: 10px;
+}
+
+td, .comment, .default, .comhead, .yclinks, .dead {
+    font-family: "Lucida Grande", "Segoe UI", Arial, Helvetica, sans-serif;
+    font-size: 15px;
+}
+
+td.title a {
+    text-decoration: none;
+    color: #4d4d4d;
+}
+.votearrow {
+  width:      10px;
+  height:     10px;
+  border:     0px;
+  margin:     3px 2px 6px;
+  background: url("https://news.ycombinator.com/grayarrow.gif")
+  no-repeat;
+}
+</style>
+</head>
+
+<body>
+    <center>
+        <table id="hnmain" border="0" cellpadding="0" cellspacing="0" width="85%" bgcolor="#f6f6ef">
+            <tbody>
+                <tr>
+                    <td bgcolor="#ff6600">
+                        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="padding:2px">
+                            <tbody>
+                                <tr>
+                                    <td style="width:18px;padding-right:4px"><a href="https://news.ycombinator.com"><img
+                                                src="https://news.ycombinator.com/y18.gif" width="18" height="18" style="border:1px white solid;"></a></td>
+                                    <td style="line-height:12pt; height:10px;"><span class="pagetop"><b class="hnname"><a
+                                                    href="news">Hacker News</a></b>
+                                            <a href="newest">new</a> | <a href="newcomments">comments</a> | <a href="show">show</a>
+                                            | <a href="ask">ask</a> | <a href="jobs">jobs</a> | <a href="submit">submit</a>
+                                        </span></td>
+                                    <td style="text-align:right;padding-right:4px;"><span class="pagetop">
+                                            <a href="login?goto=news">login</a>
+                                        </span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr style="height:10px"></tr>
+                <tr>
+                    <td>
+                        <table border="0" cellpadding="0" cellspacing="0" class="itemlist">
+                            <tbody id="posts">
+                                <tr id="begin-post" class="spacer" style="height:5px"></tr>
+                                <tr class="spacer" style="height:5px"></tr>
+                                <tr class="morespace" style="height:10px"></tr>
+                                <tr>
+                                    <td colspan="2"></td>
+                                    <td class="title"><a href="news?p=2" class="morelink" rel="nofollow">More</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td><img src="s.gif" height="10" width="0">
+                        <table width="100%" cellspacing="0" cellpadding="1">
+                            <tbody>
+                                <tr>
+                                    <td bgcolor="#ff6600"></td>
+                                </tr>
+                            </tbody>
+                        </table><br>
+                        <center><span class="yclinks"><a href="newsguidelines.html">Guidelines</a>
+                                | <a href="newsfaq.html">FAQ</a>
+                                | <a href="mailto:hn@ycombinator.com">Support</a>
+                                | <a href="https://github.com/HackerNews/API">API</a>
+                                | <a href="security.html">Security</a>
+                                | <a href="lists">Lists</a>
+                                | <a href="bookmarklet.html" rel="nofollow">Bookmarklet</a>
+                                | <a href="http://www.ycombinator.com/legal/">Legal</a>
+                                | <a href="http://www.ycombinator.com/apply/">Apply to YC</a>
+                                | <a href="mailto:hn@ycombinator.com">Contact</a></span><br><br>
+                            <form method="get" action="//hn.algolia.com/">Search:
+                                <input type="text" name="q" value="" size="17" autocorrect="off" spellcheck="false"
+                                    autocapitalize="off" autocomplete="false"></form>
+                        </center>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </center>
+    <script>
+        const req = new XMLHttpRequest()
+        req.open('GET', 'http://localhost:9000/api/posts', false)
+        req.send(null)
+
+        if (req.status === 200) {
+            const posts = JSON.parse(req.responseText)
+
+            for (var i = 0; i < posts.length; i++) {
+                addPost(posts[i], i + 1)
+            }
+        } else {
+            console.log("Error: status %d with reason (%s)", req.status, req.statusText)
+        }
+
+        function addPost(post, number) {
+            let targetElement = document.getElementById('begin-post')
+            let postElemHeader = document.createElement('tr')
+            postElemHeader.innerHTML = `
+                <td align="right" valign="top" class="title"><span class="rank">${number}.</span></td>
+                        <td valign="top" class="votelinks">
+                            <center><a id="up_18351891" href="vote?id=18351891&amp;how=up&amp;goto=news">
+                                    <div class="votearrow" title="upvote"></div>
+                                </a></center>
+                        </td>
+                        <td class="title"><a href="https://www.pipelinedb.com/blog/three-sales-mistakes-software-engineers-make"
+                                class="storylink">${post.title}</a><span
+                                class="sitebit comhead"> (<a href="from?site=pipelinedb.com"><span class="sitestr">pipelinedb.com</span></a>)</span></td>
+          
+              `
+
+            let postElem = document.createElement('tr')
+            postElem.innerHTML = `
+                <td colspan="2"></td>
+                <td class="subtext">
+                    <span class="score">${post.points}</span> by <a href="user?"
+                        class="hnuser">${post.author}</a> <span class="age"><a href="item?>${post.timeToRead}
+                            hours ago</a></span> | <a href="">hide</a>
+                    | <a href="item?>${post.comments} &nbsp;comments</a> </td>
+            `
+            targetElement.appendChild(postElemHeader)
+            targetElement.appendChild(postElem)
+        }
+
+    </script>
+</body>
+
+</html>

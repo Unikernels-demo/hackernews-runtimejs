@@ -1,0 +1,15 @@
+{
+  "name": "project",
+  "version": "0.1.0",
+  "description": "A hacker news backend with runtimejs",
+  "main": "index.js",
+  "scripts": {    
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alessio Coltellacci <lightplay8@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "eshttp": "^0.5.2",
+    "runtimejs": "^0.2.16"
+  }
+}
