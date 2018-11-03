@@ -14,13 +14,23 @@ let posts = "";
 client.request(request, function(err, response) {
     let tmp = "";
 
+    if (err !== null) {
+        tmp = "[]"
+        console.log(err)
+    }
+    else {
+        console.log("Connected to the posts database")
+    }
+
     response.ondata = function(buf) {
+        console.log("got a chunck of size ", buf.length)
         var result = Object.keys(buf).map(function(key) {
 	  tmp += String.fromCharCode(buf[key]);
         });
     }
 
     response.onend = function() {
+        console.log("got all posts from the database")
         posts = tmp;
     }
 })
