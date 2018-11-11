@@ -1,6 +1,7 @@
 FROM ubuntu
 
-RUN apt update
+# CA MARCHE PAS AVEC DOCKER
+
 RUN apt update
 RUN apt install -y \
         git \
@@ -11,10 +12,13 @@ RUN apt install -y \
         g++-multilib \
         cmake \
         clang-6.0 \
-        libzip-dev
+        libzip-dev \
+        libpcre3-dev \
+        libssl-dev \
+        genisoimage
 
 RUN git clone https://github.com/ltearno/rumprun.git
-RUN git clone https://github.com/rumpkernel/rumprun-packages.git
+RUN git clone https://github.com/ltearno/rumprun-packages.git
 
 ENV PLATFORM=hw
 ENV MACHINE=x86_64
@@ -24,6 +28,13 @@ ENV CC=gcc
 
 WORKDIR /rumprun
 RUN git submodule update --init
-RUN ./build-rr.sh -o myobj -j2 -qq ${KERNONLY} ${PLATFORM} ${EXTRAFLAGS}
+RUN ./build-rr.sh -o myobj -j8 -qq ${KERNONLY} ${PLATFORM} ${EXTRAFLAGS}
 
-# TODO : build rumprun-packages (nginx)
+WORKDIR /rumprun-packages/nginx
+
+# now run the image interactively, and do :
+# export PATH=${PATH}:/rumprun/rumprun/bin
+RUN export PATH=$PATH:/rumprun/rumprun/bin && make
+#rumprun-bake hw_virtio ./nginx.bin bin/nginx
+
+CMD bash

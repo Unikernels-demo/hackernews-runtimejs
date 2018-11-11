@@ -79,3 +79,47 @@ If you want to run the GCP bootable image locally with QEMU, you can do :
                 -s \
                 -device virtio-net,netdev=tap1,romfile= \
                 -m 128
+
+## Documentation
+
+### Bootloading sequence
+
+When starting, Include OS outputs that :
+
+```
+================================================================================
+
+                           #include<os> // Literally
+
+================================================================================
+```
+
+This is done in the `platform/x86_pc/bootloader.asm` file.
+
+The bootloader does the following things (starting in real mode) :
+
+- sets a boot data segment
+- enable A20 line
+- print a logo
+- sets global descriptor table register. There is only two segments : code and data (https://www.felixcloutier.com/x86/LGDT:LIDT.html)
+- switch to protected mode (mov eax, cr0 / or   al, 1 / mov cr0, eax) (https://en.wikipedia.org/wiki/Control_register#CR0)
+- sets the kernel stack (at 0xA0000)
+- position segment registers
+- read sectors from the disk (through a code found here, since there is no INT 13 in protected mode, disk is by using ports and not BIOS : http://wiki.osdev.org/ATA_read/write_sectors#Read_in_LBA_mode)
+- call the service entry point that was just loaded. The address of the code is written in the bootloader by the `vmbuild/vmbuild.cpp` program. In the bootloader there are 3 placeholders for three important bootstrap values : `srv_size` (size of the kernel), `srv_entry` (entry point) and `srv_load` (address where to load the kernel).
+
+### Bootloader creation
+
+The bootloader file from the `bootloader.asm` file is exactly on sector in size. The ELF binary is then appended to the created disk.
+
+The program then finds the ELF binary entry point address (depending on whether it is a 32 or 64 bit binary).
+
+It finally writes the values in the three placeholders of the bootstrap sector and write the disk image.
+
+### Kernel initialisation sequence
+
+kernel.cpp
+
+os.cpp
+
+`src/platform/x86_pc/main.cpp`

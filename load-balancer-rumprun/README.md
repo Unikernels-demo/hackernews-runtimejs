@@ -4,7 +4,7 @@ RumpRun is used to build and run Nginx. It will listen on the provided virtio ni
 
 ## How to build
 
-Build the docker image or execute each steps on your system (granted your environment will fit IncludeOs requirements...) :
+Build the docker image or execute each steps on your system (granted your environment will fit RumpRun requirements...) :
 
         docker build . -t rumprun
 
