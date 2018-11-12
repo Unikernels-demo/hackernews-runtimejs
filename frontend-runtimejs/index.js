@@ -7,8 +7,8 @@ const fs = require('fs'),
 
 const indexHtml = fs.readFileSync(__dirname + './static/index.html', 'utf8')
 
-const request = new HttpRequest('GET', '/', { 'x-header': 'value' });
-const client = new HttpClient('192.168.1.102', 8080);
+const request = new HttpRequest('GET', '/api/posts', { 'x-header': 'value' });
+const client = new HttpClient('10.0.0.42', 80);
 let posts = "";
 
 client.request(request, function(err, response) {

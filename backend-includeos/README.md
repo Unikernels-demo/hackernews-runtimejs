@@ -80,6 +80,10 @@ If you want to run the GCP bootable image locally with QEMU, you can do :
                 -device virtio-net,netdev=tap1,romfile= \
                 -m 128
 
+
+qemu-system-x86_64 -m 512 -smp 1 -s -kernel /home/arnaud/.runtime/runtime.2064 -initrd .initrd -net tap,model=virtio,macaddr=1a:46:0b:ca:bc:7c -net user,net=192.168.76.0/24,dhcpstart=192.168.76.9,hostfwd=udp::9000-:9000,hostfwd=tcp::9000-:9000 -enable-kvm -no-kvm-irqchip -serial stdio
+
+
 ## Documentation
 
 ### Bootloading sequence
