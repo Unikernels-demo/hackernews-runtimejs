@@ -22,9 +22,11 @@ NOTE: At the moment KVM is the only supported hypervisor
 
 ### Packages
 
-Install command line tool runtime-cli, it will add runtime command to the shell:
+If you want to run `runtime-cli` from any directory, install command line tool runtime-cli globally, it will add runtime command to the shell:
 
 `npm install runtime-cli -g`
+
+Otherwise, `runtime-cli` is imported by the current project so you can invoke it with `./node_modules/.bin/runtime start` from the project root directory.
 
 Make sure QEMU is installed, it enables running applications locally:
 
