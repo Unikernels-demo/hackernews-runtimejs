@@ -98,7 +98,8 @@ When starting, Include OS outputs that :
 ================================================================================
 ```
 
-This is done in the `platform/x86_pc/bootloader.asm` file.
+This is done in the `
+*` file.
 
 The bootloader does the following things (starting in real mode) :
 
@@ -110,7 +111,23 @@ The bootloader does the following things (starting in real mode) :
 - sets the kernel stack (at 0xA0000)
 - position segment registers
 - read sectors from the disk (through a code found here, since there is no INT 13 in protected mode, disk is by using ports and not BIOS : http://wiki.osdev.org/ATA_read/write_sectors#Read_in_LBA_mode)
-- call the service entry point that was just loaded. The address of the code is written in the bootloader by the `vmbuild/vmbuild.cpp` program. In the bootloader there are 3 placeholders for three important bootstrap values : `srv_size` (size of the kernel), `srv_entry` (entry point) and `srv_load` (address where to load the kernel).
+- call the kernel entry point. The address of the code is written in the bootloader by the `vmbuild/vmbuild.cpp` program. In the bootloader there are 3 placeholders for three important bootstrap values : `srv_size` (size of the kernel), `srv_entry` (entry point) and `srv_load` (address where to load the kernel).
+- the kernel initiates things (`kernel_start.cpp`) and starts the OS event loop (`platform/x86_pc/os.cpp`)
+
+The OS event loop is :
+
+```c++
+Events::get(0).process_events();
+do {
+        OS::halt();
+        Events::get(0).process_events();
+} while (power_);
+```
+
+Utilise SMP pour gérer le multi coeur.
+
+Les événements sont gérés dans `Event.cpp`. Il y a 128 evts possibles, chacun associé à une interruption.
+
 
 ### Bootloader creation
 
