@@ -22,6 +22,11 @@ Go to the `rumprun-packages/nginx` directory.
 
     rumprun-bake hw_virtio ./nginx.bin bin/nginx
 
+To reconfigure Nginx, edit the nginx.conf file and
+
+    rm images/data.iso
+    make
+
 ## Run the application
 
 Simplest way :
@@ -32,11 +37,6 @@ Simplest way :
         -W if,inet,dhcp \
         -b images/data.iso,/data \
         -- ./nginx.bin -c /data/conf/nginx.conf
-
-To reconfigure Nginx, edit the nginx.conf file and
-
-    rm images/data.iso
-    make
 
 To check do a
 
