@@ -14,7 +14,7 @@ server.onrequest = request => {
         request.respondWith(new ESHttp.HttpResponse(200, { server: 'demo' }, posts))
     }
     else {
-        request.respondWith(new ESHttp.HttpResponse(200, { server: 'demo' }, htmlPageContent))
+        request.respondWith(new ESHttp.HttpResponse(200, { server: 'demo' }, htmlPageContent.replace("@@TIME@@", Date.now())))
     }
 }
 
